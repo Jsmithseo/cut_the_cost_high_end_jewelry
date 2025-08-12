@@ -1,0 +1,25 @@
+{
+  "name": "pathway-humanity",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@hotjar/browser": "^1.0.9",
+    "bootstrap": "^5.3.5",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.1",
+    "lucide-react": "^0.525.0",
+    "next": "^15.4.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-google-recaptcha": "^3.1.0",
+    "react-hook-form": "^7.56.4",
+    "react-icons": "^5.5.0",
+    "reactstrap": "^9.2.3"
+  }
+}

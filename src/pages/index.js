@@ -338,6 +338,23 @@ export default function Home() {
         section { padding: 56px 20px; }
         .welcome-section { background: #fff; }
         .newsletter { background: #fafbfc; }
+        .hero {
+          width: 100%;
+          min-height: 400px; /* fallback height */
+          background-image: url('/images/hero_image_home.jpg');
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain; /* show full image */
+          background-color: #e9f6fa;
+        }
+        
+        /* Optional: increase height for larger screens */
+        @media (min-width: 768px) {
+          .hero {
+            min-height: 700px;
+            background-size: cover; /* fill space on desktop */
+          }
+        }
 
       `}</style>
     </>

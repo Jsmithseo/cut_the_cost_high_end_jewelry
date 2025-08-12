@@ -134,13 +134,7 @@ export default function Home() {
       {/* HERO (mobile-optimized background images) */}
       <section className="hero">
         {/* Optional overlayed content; keep/remove as needed */}
-        <div className="hero-content">
-          <h1>Cut the High Cost of Custom Jewelry</h1>
-          <p>
-            Natural diamonds only. EGL &amp; GIA certified. Designed around your budget—no compromise on brilliance.
-          </p>
-          <a href="/contact" className="btn">Get My Custom Quote</a>
-        </div>
+
       </section>
 
       {/* WELCOME / MISSION */}

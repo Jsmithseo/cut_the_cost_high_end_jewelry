@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import MainNavBar from '../components/MainNavBar';
+// pages/index.js
+import React, { useState, useEffect } from "react";
+import MainNavBar from "../components/MainNavBar";
 import Footer from "../components/Footer";
 import ReCAPTCHA from "react-google-recaptcha";
-import Gallery from "../components/Gallery"
-import { 
-  
+import Gallery from "../components/Gallery";
+import {
   Container,
   Row,
   Col,
@@ -16,55 +16,40 @@ import {
   Label,
   Input,
   Alert,
-  Spinner}from "reactstrap";
+  Spinner,
+} from "reactstrap";
 
-// Animated number component
+// Animated number component (if you need it later)
 function AnimatedNumber({ to, duration = 1500, decimals = 0, prefix = "", suffix = "" }) {
-  const [count, setCount] = React.useState(0);
-  React.useEffect(() => {
-    let start = 0;
-    let end = to;
-    let range = end - start;
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const start = 0;
+    const end = to;
+    const range = end - start;
     let startTime = null;
-    function step(timestamp) {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
+
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      const progress = Math.min((ts - startTime) / duration, 1);
       const value = start + range * progress;
       setCount(value);
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
-        setCount(end);
-      }
+      if (progress < 1) requestAnimationFrame(step);
+      else setCount(end);
     }
     requestAnimationFrame(step);
   }, [to, duration]);
-  return (
-    <span>
-      {prefix}
-      {decimals > 0 ? count.toFixed(decimals) : Math.round(count)}
-      {suffix}
-    </span>
-  );
+
+  return <span>{prefix}{decimals > 0 ? count.toFixed(decimals) : Math.round(count)}{suffix}</span>;
 }
 
-// ToggleCard component with background color
+// Expandable card (kept in case you use it below)
 function ToggleCard({ title, color, children }) {
   const [isOpen, setIsOpen] = useState(false);
-
   return (
-    <Card
-      className="border-0 shadow h-100"
-      style={{
-        backgroundColor: color,
-        color: "#fff",
-      }}
-    >
+    <Card className="border-0 shadow h-100" style={{ backgroundColor: color, color: "#fff" }}>
       <CardBody>
         <h4 className="fw-bold mb-3" style={{ color: "#fff" }}>{title}</h4>
-        <div className={`toggle-content ${isOpen ? "open" : "collapsed"}`}>
-          {children}
-        </div>
+        <div className={`toggle-content ${isOpen ? "open" : "collapsed"}`}>{children}</div>
         <Button
           color="link"
           className="p-0 mt-2 fw-bold"
@@ -75,246 +60,286 @@ function ToggleCard({ title, color, children }) {
         </Button>
       </CardBody>
       <style jsx>{`
-        .toggle-content.collapsed {
-          max-height: 140px;
-          overflow: hidden;
-          transition: max-height 0.3s ease;
-        }
-        .toggle-content.open {
-          max-height: 2000px;
-          transition: max-height 0.4s ease;
-        }
+        .toggle-content.collapsed { max-height: 140px; overflow: hidden; transition: max-height 0.3s ease; }
+        .toggle-content.open { max-height: 2000px; transition: max-height 0.4s ease; }
       `}</style>
     </Card>
   );
 }
 
 export default function Home() {
-   // HubSpot form IDs
-   const HUBSPOT_PORTAL_ID = "243400623"
-   const HUBSPOT_FORM_ID = "1712ae97-5882-46c9-a06e-8a3daed3511b"
-   const RECAPTCHA_SITE_KEY = "6LeQUZ8rAAAAAGSsXvs6u2QdeamqIiofil95StUo"
- 
-   // Newsletter state
-   const [newsletter, setNewsletter] = useState({ firstName: "", lastName: "", email: "" });
-   const [nlStatus, setNlStatus] = useState({ submitting: false, success: false, error: "" });
-   const [recaptchaToken, setRecaptchaToken] = useState(null);
- 
-   const handleNlChange = (e) => {
-     setNewsletter({ ...newsletter, [e.target.name]: e.target.value });
-   };
- 
-   const handleNlSubmit = async (e) => {
+  // HubSpot Newsletter form config
+  const HUBSPOT_PORTAL_ID = "243400623";
+  const HUBSPOT_FORM_ID = "1712ae97-5882-46c9-a06e-8a3daed3511b";
+  const RECAPTCHA_SITE_KEY = "6LeQUZ8rAAAAAGSsXvs6u2QdeamqIiofil95StUo";
+
+  const [newsletter, setNewsletter] = useState({ firstName: "", lastName: "", email: "" });
+  const [nlStatus, setNlStatus] = useState({ submitting: false, success: false, error: "" });
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
+
+  const handleNlChange = (e) => setNewsletter({ ...newsletter, [e.target.name]: e.target.value });
+
+  const handleNlSubmit = async (e) => {
     e.preventDefault();
-    // require captcha
     if (!recaptchaToken) {
       setNlStatus({ submitting: false, success: false, error: "Please complete the captcha." });
       return;
     }
     setNlStatus({ submitting: true, success: false, error: "" });
-  
+
     const endpoint = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`;
     const payload = {
       fields: [
-        { name: "email",     value: newsletter.email     },
+        { name: "email", value: newsletter.email },
         { name: "firstname", value: newsletter.firstName },
-        { name: "lastname",  value: newsletter.lastName  },
+        { name: "lastname", value: newsletter.lastName },
       ],
       context: {
-        pageUri: window.location.href,
-        pageName: document.title,
-        recaptchaToken
+        pageUri: typeof window !== "undefined" ? window.location.href : "",
+        pageName: "Home",
+        recaptchaToken,
       },
-      // omit legalConsentOptions for now if you’re not using GDPR fields
     };
-  
+
     try {
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-  
-      const body = await res.json();                  // ← read the response
-      console.error("HubSpot response:", body);       // ← log it
-  
+      const body = await res.json();
+      console.error("HubSpot response:", body);
+
       if (res.ok) {
         setNlStatus({ submitting: false, success: true, error: "" });
         setNewsletter({ firstName: "", lastName: "", email: "" });
         setRecaptchaToken(null);
       } else {
-        // show the HubSpot error message
-        setNlStatus({ submitting: false, success: false, error: body?.errors?.[0]?.message || "Bad Request" });
+        setNlStatus({
+          submitting: false,
+          success: false,
+          error: body?.errors?.[0]?.message || "Submission error",
+        });
       }
     } catch (err) {
       console.error(err);
       setNlStatus({ submitting: false, success: false, error: err.message });
     }
   };
-  
- 
+
   return (
     <>
       <MainNavBar />
 
-      {/* HERO SECTION */}
+      {/* HERO (mobile-optimized background images) */}
       <section className="hero">
-
+        {/* Optional overlayed content; keep/remove as needed */}
+        <div className="hero-content">
+          <h1>Cut the High Cost of Custom Jewelry</h1>
+          <p>
+            Natural diamonds only. EGL &amp; GIA certified. Designed around your budget—no compromise on brilliance.
+          </p>
+          <a href="/contact" className="btn">Get My Custom Quote</a>
+        </div>
       </section>
 
-      {/* WELCOME / MISSION SECTION */}
+      {/* WELCOME / MISSION */}
       <section className="welcome-section">
         <Container>
           <Row className="justify-content-center">
-            <Col md={12} lg={12}>
-              <h1 className="fw-bold mb-3" style={{ fontSize: "2.3rem", letterSpacing: 1, Color: "#000" }}>
-              Luxury You Can Trust. Diamonds You Can Believe In.
-              </h1>
-              <p style={{ fontSize: "1.2rem", lineHeight: 1.7, Color: "black" }}>
-              At Cut The Cost High End Jewelry, every piece is crafted with precision, passion, and the promise of authenticity. We work exclusively with natural diamonds, never lab-created, so you can cherish the timeless beauty and rarity of the real thing.
+            <Col lg={10}>
+              <h2 className="fw-bold mb-3" style={{ fontSize: "2rem", letterSpacing: ".5px" }}>
+                Luxury You Can Trust. Diamonds You Can Believe In.
+              </h2>
+              <p style={{ fontSize: "1.1rem", lineHeight: 1.7, color: "#111" }}>
+                At Cut The Cost High End Jewelry, every piece is crafted with precision, passion, and the promise of authenticity.
+                We work exclusively with natural diamonds—never lab-created—so you can cherish the timeless beauty and rarity of the real thing.
                 <br /><br />
-                Our stones are EGL and GIA certified, ensuring they meet the highest standards for quality, brilliance, and value. From the initial sketch to the final polish, your custom jewelry is designed to be as unique as your story — a piece that’s truly one of a kind.
+                Our stones are EGL and GIA certified, ensuring they meet the highest standards for quality, brilliance, and value.
+                From the initial sketch to the final polish, your custom jewelry is designed to be as unique as your story — a
+                piece that’s truly one of a kind.
               </p>
             </Col>
           </Row>
         </Container>
       </section>
-      <Gallery/>
+
+      {/* GALLERY (your component) */}
+      <Gallery />
+
+      {/* NEWSLETTER SIGNUP */}
+      <section className="newsletter">
+        <Container>
+          <Row className="justify-content-center">
+            <Col md={10} lg={8}>
+              <Card className="shadow-sm border-0 rounded-4">
+                <CardBody>
+                  <h3 className="fw-bold mb-2" style={{ color: "#0f7a65" }}>Get Early Access & Insider Pricing</h3>
+                  <p className="mb-3" style={{ color: "#333" }}>
+                    Join the list for diamond education, new designs, and member-only offers.
+                  </p>
+
+                  {nlStatus.success ? (
+                    <Alert color="success">Thanks! You’re on the list.</Alert>
+                  ) : (
+                    <Form onSubmit={handleNlSubmit}>
+                      <Row>
+                        <Col md={4}>
+                          <FormGroup>
+                            <Label for="firstName">First name</Label>
+                            <Input
+                              id="firstName"
+                              name="firstName"
+                              value={newsletter.firstName}
+                              onChange={handleNlChange}
+                              required
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col md={4}>
+                          <FormGroup>
+                            <Label for="lastName">Last name</Label>
+                            <Input
+                              id="lastName"
+                              name="lastName"
+                              value={newsletter.lastName}
+                              onChange={handleNlChange}
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col md={4}>
+                          <FormGroup>
+                            <Label for="email">Email</Label>
+                            <Input
+                              id="email"
+                              type="email"
+                              name="email"
+                              value={newsletter.email}
+                              onChange={handleNlChange}
+                              required
+                            />
+                          </FormGroup>
+                        </Col>
+                      </Row>
+
+                      <div className="d-flex justify-content-center my-2">
+                        <ReCAPTCHA
+                          sitekey={RECAPTCHA_SITE_KEY}
+                          onChange={(token) => setRecaptchaToken(token)}
+                          onExpired={() => setRecaptchaToken(null)}
+                        />
+                      </div>
+
+                      {nlStatus.error && <Alert color="danger">{nlStatus.error}</Alert>}
+
+                      <Button color="primary" disabled={nlStatus.submitting || !recaptchaToken}>
+                        {nlStatus.submitting ? <Spinner size="sm" /> : "Subscribe"}
+                      </Button>
+                    </Form>
+                  )}
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      </section>
 
       <Footer />
 
+      {/* STYLES */}
       <style jsx global>{`
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Helvetica Neue', Arial, sans-serif; color: #fff; line-height: 1.6; }
-  a { text-decoration: none; color: inherit; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; color: #0a0c0e; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
 
-  /* HERO SECTION */
-  .hero {
-    max-height: 700px;
-    width: 100%;
-    aspect-ratio: 1 / 2;       /* 4:3 aspect ratio */
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; /* or center, as you prefer */
-    background-image: url('/images/hero_image_home.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: #e9f6fa;
-    overflow: hidden;           /* ensure no overflow */
-  }
-  
-  .hero-content {
-    background: rgba(255,255,255,0.85);
-    padding: 8px 32px;
-    border-radius: 10px;
-    max-width: 470px;
-    margin-left: 6vw;
-    box-shadow: 0 6px 32px rgba(0,0,0,0.08);
-    text-align: left;
-  }
-  .hero-content h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: #203354; /* Dark color for hero heading */
-  }
-  .hero-content p {
-    font-size: 1.25rem;
-    margin-bottom: 32px;
-    color: #222; /* Dark color for hero paragraph */
-  }
-  .hero-content .btn {
-    background: #1d7acb;
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 4px;
-    font-weight: bold;
-    text-decoration: none;
-    transition: background 0.2s;
-    border: none;
-  }
-  .hero-content .btn:hover {
-    background: #005b7a;
-  }
+        /* HERO: mobile-optimized via art direction swap */
+        .hero {
+          position: relative;
+          width: 100%;
+          min-height: 70vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-image: url('/images/hero_image_home.jpg'); /* desktop/wide */
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-color: #0f1115;
+          overflow: hidden;
+        }
+        .hero::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.25));
+          pointer-events: none;
+        }
+        .hero-content {
+          position: relative;
+          background: rgba(255,255,255,0.9);
+          padding: 14px 20px;
+          border-radius: 12px;
+          max-width: 520px;
+          margin: 0 20px;
+          box-shadow: 0 6px 32px rgba(0,0,0,0.08);
+          text-align: left;
+        }
+        .hero-content h1 {
+          font-size: 2rem;
+          font-weight: 800;
+          margin: 0 0 10px;
+          color: #203354;
+        }
+        .hero-content p {
+          font-size: 1.05rem;
+          margin: 0 0 14px;
+          color: #222;
+        }
+        .hero-content .btn {
+          background: #1d7acb;
+          color: #fff;
+          padding: 10px 18px;
+          border-radius: 8px;
+          font-weight: 700;
+          border: none;
+          display: inline-block;
+        }
+        .hero-content .btn:hover { opacity: .9; }
 
+        /* Mobile crop + tighter layout */
+        @media (max-width: 768px) {
+          .hero {
+            min-height: 60vh;
+            background-image: url('/images/hero_image_home_mobile.jpg'); /* add this file */
+            background-position: 40% center; /* adjust to keep subject visible */
+          }
+          .hero-content {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 14px;
+            padding: 10px 14px;
+          }
+          .hero-content h1 {
+            font-size: 1.6rem;
+            line-height: 1.2;
+          }
+          .hero-content p {
+            font-size: 0.98rem;
+            line-height: 1.5;
+          }
+        }
 
-  .py-5 {
-    padding-top: 0rem !important;
-}
+        @media (min-width: 1200px) {
+          .hero { min-height: 78vh; }
+          .hero-content h1 { font-size: 2.2rem; }
+        }
 
+        /* Sections */
+        section { padding: 56px 20px; }
+        .welcome-section { background: #fff; }
+        .newsletter { background: #fafbfc; }
 
-  section { padding: 60px 40px; }
-
-  /* RESEARCH SECTION */
-  .research-section {
-    max-width: 1240px;
-    margin: 0 auto;
-    padding: 60px 20px 80px 20px;
-    text-align: center;
-  }
-  .research-title {
-    font-size: 2.4rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-  }
-  .research-desc {
-    font-size: 1.15rem;
-    color: #fff; /* White text for research description */
-    max-width: 760px;
-    margin: 0 auto 60px auto;
-    line-height: 1.7;
-  }
-  .research-cards {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .research-card {
-    border-radius: 8px;
-    flex: 1 1 320px;
-    max-width: 350px;
-    min-height: 300px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 1px 10px rgba(0,0,0,0.07);
-  }
-  .stat-top {
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: 2.7rem;
-    font-weight: 600;
-    padding-left: 32px;
-  }
-  .stat-bottom {
-    display: flex;
-    align-items: flex-end;
-  }
-  .stat-green-bottom {
-    background: #14c9d6;
-    color: #fff;
-  }
-  .stat-blue-bottom {
-    background: #14c9d6;
-    color: #fff;
-  }
-  .stat-green2-bottom {
-    background: #14c9d6;
-    color: #fff;
-  }
-  .stat-label {
-    display: block;
-    font-size: 1.04rem;
-    font-weight: 600;
-    text-align: left;
-    padding: 20px 0 20px 20px;
-    max-width: 180px;
-  }
-`}</style>
+      `}</style>
     </>
   );
 }

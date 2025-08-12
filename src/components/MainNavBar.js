@@ -24,9 +24,6 @@ export default function TopNav() {
             src="/images/logo.png"
             alt="Brand Logo"
             className="logo"
-            width={168}      
-            height={42}
-            priority
           />
         </Link>
         {/* Mobile toggle */}
@@ -84,6 +81,7 @@ export default function TopNav() {
           z-index: 50;
           background: var(--bg);
           box-shadow: var(--shadow);
+          background-color: #fff;
         }
 
         /* Logo row */
@@ -95,7 +93,7 @@ export default function TopNav() {
           position: relative;
         }
         .logo {
-          height: 42px; /* tune as needed to mimic the screenshot */
+          height: 200px; /* tune as needed to mimic the screenshot */
           width: auto;
           object-fit: contain;
         }
@@ -187,7 +185,7 @@ export default function TopNav() {
           .link {
             font-size: 1rem;
           }
-        }
+        
       `}</style>
     </header>
   );

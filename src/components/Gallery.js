@@ -7,8 +7,8 @@ export default function ShopPopular() {
   // Mix of images & videos
   const items = [
     { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie1.mp4", poster: "images/movie1_image.png" },
-    { title: "Pendants", href: "/pendants", imgSrc: "/images/popular/pendants.jpg" },
-    { title: "Gold Chains", href: "/gold-chains", imgSrc: "/images/popular/gold-chains.jpg" },
+    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie1.mp4", poster: "images/movie1_image.png" },
+    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie1.mp4", poster: "images/movie1_image.png" },
     { title: "Earrings", href: "/earrings", imgSrc: "/images/popular/earrings.jpg" },
     { title: "Necklaces", href: "/necklaces", imgSrc: "/images/popular/necklaces.jpg" },
     { title: "Rings", href: "/rings", imgSrc: "/images/popular/rings.jpg" },
@@ -90,7 +90,7 @@ export default function ShopPopular() {
 
         /* Square media container */
         .media-wrap {
-          position: relative; width: 100%; padding-top: 100%;
+          position: relative; width: 100%;
           overflow: hidden; background: #0f1115;
         }
         .media, .video {
@@ -102,6 +102,9 @@ export default function ShopPopular() {
           text-align: center; padding: 10px 8px 12px;
           font-size: 0.95rem; font-weight: 500;
         }
+
+
+        
       `}</style>
     </section>
   );

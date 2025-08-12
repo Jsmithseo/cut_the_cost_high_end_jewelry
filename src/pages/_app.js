@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }) {
       {/* Global Teal Background */}
       <style jsx global>{`
         body {
-          background-color: #009A9A;
+          background-color: #fff;
         }
       `}</style>
     </>

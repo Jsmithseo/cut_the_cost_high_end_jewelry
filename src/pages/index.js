@@ -263,7 +263,7 @@ export default function Home() {
           background-position: center;
           background-repeat: no-repeat;
           background-size: contain; /* show full image */
-          background-color: #e9f6fa;
+          background-color: #050503;
         }
         
         /* Optional: increase height for larger screens */

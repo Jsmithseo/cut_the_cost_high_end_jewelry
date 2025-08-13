@@ -109,7 +109,7 @@ export default function Contact() {
       {/* HERO: Cut the High Cost – Custom Jewelry */}
       <div
         style={{
-          background: `linear-gradient(rgba(14,16,18,.55),rgba(14,16,18,.55)), url('/images/hero_custom_jewelry.jpg') center/cover no-repeat`,
+          background: "#000",
           minHeight: 720, display: "flex", alignItems: "center", justifyContent: "center",
         }}
       >
@@ -129,7 +129,7 @@ export default function Contact() {
           <Col md={10} lg={8}>
             <Card className="shadow-sm border-0 rounded-4 h-100">
               <CardBody>
-                <h3 className="fw-bold mb-2" style={{ color: "#0f7a65" }}>
+                <h3 className="fw-bold mb-2" style={{ color: "#000" }}>
                   Start Your Custom Piece
                 </h3>
                 <p style={{ fontSize: 16 }}>

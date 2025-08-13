@@ -8,22 +8,22 @@ import {
 
 export default function ShopPopular() {
   const items = [
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie1.mp4", poster: "/images/movie1_image.png" },
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie2.mp4", poster: "/images/movie1_image.png" },
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie3.mp4", poster: "/images/movie1_image.png" },
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie4.mp4", poster: "/images/movie1_image.png" },
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie5.mp4", poster: "/images/movie1_image.png" },
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie6.mp4", poster: "/images/movie1_image.png" },
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie7.mp4", poster: "/images/movie1_image.png" },
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie8.mp4", poster: "/images/movie1_image.png" },
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie9.mp4", poster: "/images/movie1_image.png" },
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie10.mp4", poster: "/images/movie1_image.png" },
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie11.mp4", poster: "/images/movie1_image.png" },
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie12.mp4", poster: "/images/movie1_image.png" },
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie13.mp4", poster: "/images/movie1_image.png" },
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie14.mp4", poster: "/images/movie1_image.png" },
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie15.mp4", poster: "/images/movie1_image.png" },
-    { title: "Lookbook", href: "/lookbook", type: "video", videoSrc: "/images/movie16.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie1.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie2.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie3.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie4.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie5.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie6.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie7.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie8.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie9.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie10.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie11.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie12.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie13.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie14.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie15.mp4", poster: "/images/movie1_image.png" },
+    { title: "", href: "/lookbook", type: "video", videoSrc: "/images/movie16.mp4", poster: "/images/movie1_image.png" },
   ];
 
   const [open, setOpen] = useState(false);
@@ -43,7 +43,7 @@ export default function ShopPopular() {
       <Container>
         {/* Header */}
         <div className="header">
-          <h3>Featured Items</h3>
+          <h2>Featured Items</h2>
         </div>
 
         {/* Grid */}

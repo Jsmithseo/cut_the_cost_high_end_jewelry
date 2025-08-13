@@ -162,7 +162,7 @@ export default function About() {
 
       <style jsx>{`
         .hero {
-          background: linear-gradient(90deg, #0f7a65, #0b6ea8);
+          background: #000;
           min-height: 300px;
           display: flex;
           align-items: center;

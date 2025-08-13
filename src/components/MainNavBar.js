@@ -1,7 +1,7 @@
-// components/TopNav.jsx
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
 
 export default function TopNav() {
   const { pathname } = useRouter();
@@ -19,13 +19,29 @@ export default function TopNav() {
       {/* Logo row */}
       <div className="logo-row">
         <Link href="/" className="logo-link" aria-label="Home">
-          {/* Replace with your brand mark */}
-          <img
-            src="/images/logo.png"
-            alt="Brand Logo"
-            className="logo"
-          />
+          <img src="/images/logo.png" alt="Brand Logo" className="logo" />
         </Link>
+
+        {/* Social Icons (desktop only; hidden on mobile) */}
+        <div className="social-icons">
+          <a
+            href="https://www.instagram.com/yourhandle"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+            <FaInstagram />
+          </a>
+          <a
+            href="https://www.facebook.com/yourhandle"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+          >
+            <FaFacebookF />
+          </a>
+        </div>
+
         {/* Mobile toggle */}
         <button
           className="hamburger"
@@ -43,8 +59,7 @@ export default function TopNav() {
       <nav className={`menu ${open ? "open" : ""}`} aria-label="Primary">
         <ul>
           {items.map((item) => {
-            const isActive =
-              item.variant === "active" || pathname === item.href;
+            const isActive = item.variant === "active" || pathname === item.href;
             return (
               <li key={item.href}>
                 <Link
@@ -53,7 +68,7 @@ export default function TopNav() {
                     "link",
                     isActive ? "is-active" : "",
                     item.variant === "sale" ? "is-sale" : "",
-                    item.variant === "bold" ? "is-bold" : "",
+                    item.variant === "bold" ? "is-bold" : ""
                   ].join(" ").trim()}
                   onClick={() => setOpen(false)}
                 >
@@ -62,6 +77,26 @@ export default function TopNav() {
               </li>
             );
           })}
+
+          {/* Social icons INSIDE the mobile menu (hidden on desktop) */}
+          <li className="mobile-social-icons">
+            <a
+              href="https://www.instagram.com/yourhandle"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <FaInstagram />
+            </a>
+            <a
+              href="https://www.facebook.com/yourhandle"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+            >
+              <FaFacebookF />
+            </a>
+          </li>
         </ul>
       </nav>
 
@@ -69,7 +104,7 @@ export default function TopNav() {
         :root {
           --text: #111;
           --muted: #666;
-          --brand-blue: #2b86b8; /* tasteful cobalt */
+          --brand-blue: #2b86b8;
           --bg: #fff;
           --shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
           --gap: 26px;
@@ -81,7 +116,6 @@ export default function TopNav() {
           z-index: 50;
           background: var(--bg);
           box-shadow: var(--shadow);
-          background-color: #fff;
         }
 
         /* Logo row */
@@ -93,7 +127,7 @@ export default function TopNav() {
           position: relative;
         }
         .logo {
-          height: 200px; /* tune as needed to mimic the screenshot */
+          height: 200px;
           width: auto;
           object-fit: contain;
         }
@@ -103,27 +137,47 @@ export default function TopNav() {
           justify-content: center;
         }
 
-        /* Hamburger (mobile only) */
+        /* Desktop social icons (top-right) */
+        .social-icons {
+          position: absolute;
+          right: 60px;
+          top: 50%;
+          transform: translateY(-50%);
+          display: flex;
+          gap: 12px;
+        }
+        .social-icons a {
+          color: var(--text);
+          font-size: 1.2rem;
+          transition: opacity 0.2s ease;
+        }
+        .social-icons a:hover {
+          opacity: 0.7;
+        }
+
+        /* Hamburger: black button w/ rounded white lines */
         .hamburger {
           position: absolute;
           right: 12px;
           top: 16px;
           display: none;
-          width: 36px;
-          height: 36px;
-          border: 1px solid #e5e7eb;
+          width: 50px;
+          height: 50px;
+          border: none;
           border-radius: 8px;
-          background: #fff;
+          background: #000;
           align-items: center;
           justify-content: center;
-          gap: 4px;
+          flex-direction: column;
+          gap: 6px;
+          padding: 8px;
         }
         .hamburger span {
           display: block;
-          width: 18px;
-          height: 2px;
-          background: #111;
-          margin: 3px auto;
+          width: 28px;
+          height: 6px;
+          background: #fff;
+          border-radius: 10px;
         }
 
         /* Menu row */
@@ -138,9 +192,7 @@ export default function TopNav() {
           align-items: center;
           justify-content: center;
           flex-wrap: wrap;
-          gap: var(--gap);
-          gap: 40px; /* increased from var(--gap) to 40px for more space */
-
+          gap: 40px;
         }
         .link {
           font-size: 0.98rem;
@@ -153,39 +205,48 @@ export default function TopNav() {
         .link:hover {
           opacity: 0.7;
         }
-        .is-active {
-          font-weight: 600; /* bold like "Engagement" in screenshot */
-        }
-        .is-sale {
-          color: var(--brand-blue); /* blue like SALE in screenshot */
-          font-weight: 600;
-        }
-        .is-bold {
-          font-weight: 700; /* like "We Buy Jewelry" */
-        }
+        .is-active { font-weight: 600; }
+        .is-sale { color: var(--brand-blue); font-weight: 600; }
+        .is-bold { font-weight: 700; }
 
-        /* Mobile */
+        /* Mobile adjustments */
         @media (max-width: 768px) {
-          .hamburger {
-            display: inline-flex;
-          }
+          .hamburger { display: inline-flex; }
+
+          /* Hide top-right social on mobile */
+          .social-icons { display: none; }
+
           .menu {
             display: none;
             border-top: 1px solid #f1f5f9;
           }
-          .menu.open {
-            display: block;
-          }
+          .menu.open { display: block; }
           .menu ul {
             flex-direction: column;
             align-items: center;
             gap: 10px;
             padding: 10px 16px 16px;
           }
-          .link {
-            font-size: 1rem;
+
+          /* Show social icons INSIDE the mobile menu */
+          .mobile-social-icons {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            padding-top: 6px;
           }
-        
+          .mobile-social-icons a {
+            color: var(--text);
+            font-size: 1.4rem;
+            transition: opacity 0.2s ease;
+          }
+          .mobile-social-icons a:hover { opacity: 0.7; }
+        }
+
+        /* Hide the mobile menu social row on desktop */
+        @media (min-width: 769px) {
+          .mobile-social-icons { display: none; }
+        }
       `}</style>
     </header>
   );

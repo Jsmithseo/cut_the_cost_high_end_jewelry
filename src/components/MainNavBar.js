@@ -11,7 +11,7 @@ export default function TopNav() {
   const items = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" }
+    { label: "Start Your Design", href: "/contact" }
   ];
 
   return (
@@ -25,7 +25,7 @@ export default function TopNav() {
         {/* Social Icons (desktop only; hidden on mobile) */}
         <div className="social-icons">
           <a
-            href="https://www.instagram.com/yourhandle"
+            href="https://www.instagram.com/cut_the_cost_high_end_jewelry/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"

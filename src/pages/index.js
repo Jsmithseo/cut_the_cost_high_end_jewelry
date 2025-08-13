@@ -162,6 +162,59 @@ export default function Home() {
       <Gallery />
 
 
+            {/* PROCESS */}
+            <section className="pad">
+        <Container>
+          <Row className="justify-content-center text-center">
+            <Col lg="8">
+              <h2 className="section-title">Our Process</h2>
+              <p className="mb-4">
+                Simple, guided, and collaborative — so you can enjoy the journey as much as the result.
+              </p>
+            </Col>
+          </Row>
+
+          <Row className="g-4">
+            {[
+              { step: "1", title: "Consult", desc: "Share your vision, budget, and timeline with a jewelry specialist." },
+              { step: "2", title: "Design", desc: "We develop sketches/3D renders and source certified natural diamonds." },
+              { step: "3", title: "Craft", desc: "Master jewelers hand-set stones and finish your piece to perfection." },
+              { step: "4", title: "Deliver", desc: "You receive your certified, custom piece — ready to wear and cherish." },
+            ].map((s) => (
+              <Col key={s.step} md="3" sm="6">
+                <Card className="h-100 step-card">
+                  <CardBody className="text-center">
+                    <div className="step-badge">{s.step}</div>
+                    <h6 className="mb-2">{s.title}</h6>
+                    <p className="mb-0 small">{s.desc}</p>
+                  </CardBody>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+      <div className="text-center mt-4">
+  <Button
+    href="/contact"
+    color="dark"
+    size="lg"
+    style={{
+      backgroundColor: "#000",
+      color: "#fff",
+      padding: "12px 28px",
+      borderRadius: "8px",
+      fontWeight: "bold",
+      textTransform: "uppercase",
+    }}
+  >
+    Start Your Design
+    
+  </Button>
+</div>
+<br/>
+<br/>
+
       <Footer />
 
       {/* STYLES */}

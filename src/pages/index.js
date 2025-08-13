@@ -182,6 +182,7 @@ export default function Home() {
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
+          background-color: #050503;
           overflow: hidden;
         }
         .hero::before {

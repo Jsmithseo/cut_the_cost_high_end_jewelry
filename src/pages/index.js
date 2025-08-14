@@ -163,7 +163,7 @@ export default function Home() {
 
 
             {/* PROCESS */}
-            <section className="pad">
+      <section className="pad">
         <Container>
           <Row className="justify-content-center text-center">
             <Col lg="8">

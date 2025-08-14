@@ -10,8 +10,9 @@ export default function TopNav() {
   // Edit your menu here
   const items = [
     { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Start Your Design", href: "/contact" }
+    { label: "Start Your Design", href: "/contact" },
+    { label: "About", href: "/about" }
+    
   ];
 
   return (

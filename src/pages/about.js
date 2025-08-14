@@ -193,7 +193,7 @@ export default function About() {
           display: grid; place-items: center; background: #0f7a65; color: #fff; font-weight: 700;
         }
 
-        .cta { background: linear-gradient(90deg, #0f7a65, #0b6ea8); padding: 44px 0; margin-top: 12px; }
+        .cta { background: #000; padding: 44px 0; margin-top: 12px; }
         .cta-btn { display: inline-block; padding: 10px 16px; background: #fff; color: #0f7a65; border-radius: 10px;
           text-decoration: none; font-weight: 700; box-shadow: 0 4px 14px rgba(0,0,0,.12); }
         .cta-btn:hover { opacity: .9; }

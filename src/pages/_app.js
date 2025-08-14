@@ -29,6 +29,8 @@ function MyApp({ Component, pageProps }) {
       <style jsx global>{`
         body {
           background-color: #fff;
+          a.link{ color: #000!important;
+          }
         }
       `}</style>
     </>

@@ -34,7 +34,7 @@ export default function TopNav() {
             <FaInstagram />
           </a>
           <a
-            href="https://www.facebook.com/yourhandle"
+            href="https://www.facebook.com/cutthecost.highendjewelry/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"

@@ -154,7 +154,7 @@ export default function Home() {
           piece that’s truly one of a kind.
         </p>
         <div style={{ marginTop: "20px", padding: "14px", background: "#f8f8f8", borderRadius: "8px" }}>
-          <strong>Flexible Financing Available:</strong>  
+          <strong>Flexible Financing Available: </strong>  
           We’ve partnered with <a href="https://www.affirm.com" target="_blank" rel="noopener noreferrer" style={{ color: "#1d7acb", fontWeight: "bold" }}>Affirm</a> so you can pay over time.  
           Get the jewelry you love today and spread payments out over manageable monthly installments.
         </div>

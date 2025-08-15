@@ -147,7 +147,7 @@ export default function Home() {
         </h2>
         <p style={{ fontSize: "1.1rem", lineHeight: 1.7, color: "#111" }}>
           At Cut The Cost High End Jewelry, every piece is crafted with precision, passion, and the promise of authenticity.
-          We work exclusively with natural diamonds—never lab-created—so you can cherish the timeless beauty and rarity of the real thing.
+          We work exclusively with natural diamonds so you can cherish the timeless beauty. We have over 18 years of experience in the diamond business, specializing in both diamonds and craftsmanship.
           <br /><br />
           Our stones are EGL and GIA certified, ensuring they meet the highest standards for quality, brilliance, and value.
           From the initial sketch to the final polish, your custom jewelry is designed to be as unique as your story — a

@@ -139,24 +139,29 @@ export default function Home() {
 
       {/* WELCOME / MISSION */}
       <section className="welcome-section">
-        <Container>
-          <Row className="justify-content-center">
-            <Col lg={10}>
-              <h2 className="fw-bold mb-3" style={{ fontSize: "2rem", letterSpacing: ".5px" }}>
-                Luxury You Can Trust. Diamonds You Can Believe In.
-              </h2>
-              <p style={{ fontSize: "1.1rem", lineHeight: 1.7, color: "#111" }}>
-                At Cut The Cost High End Jewelry, every piece is crafted with precision, passion, and the promise of authenticity.
-                We work exclusively with natural diamonds—never lab-created—so you can cherish the timeless beauty and rarity of the real thing.
-                <br /><br />
-                Our stones are EGL and GIA certified, ensuring they meet the highest standards for quality, brilliance, and value.
-                From the initial sketch to the final polish, your custom jewelry is designed to be as unique as your story — a
-                piece that’s truly one of a kind.
-              </p>
-            </Col>
-          </Row>
-        </Container>
-      </section>
+  <Container>
+    <Row className="justify-content-center">
+      <Col lg={10}>
+        <h2 className="fw-bold mb-3" style={{ fontSize: "2rem", letterSpacing: ".5px" }}>
+          Luxury You Can Trust. Diamonds You Can Believe In.
+        </h2>
+        <p style={{ fontSize: "1.1rem", lineHeight: 1.7, color: "#111" }}>
+          At Cut The Cost High End Jewelry, every piece is crafted with precision, passion, and the promise of authenticity.
+          We work exclusively with natural diamonds—never lab-created—so you can cherish the timeless beauty and rarity of the real thing.
+          <br /><br />
+          Our stones are EGL and GIA certified, ensuring they meet the highest standards for quality, brilliance, and value.
+          From the initial sketch to the final polish, your custom jewelry is designed to be as unique as your story — a
+          piece that’s truly one of a kind.
+        </p>
+        <div style={{ marginTop: "20px", padding: "14px", background: "#f8f8f8", borderRadius: "8px" }}>
+          <strong>Flexible Financing Available:</strong>  
+          We’ve partnered with <a href="https://www.affirm.com" target="_blank" rel="noopener noreferrer" style={{ color: "#1d7acb", fontWeight: "bold" }}>Affirm</a> so you can pay over time.  
+          Get the jewelry you love today and spread payments out over manageable monthly installments.
+        </div>
+      </Col>
+    </Row>
+  </Container>
+</section>
 
       {/* GALLERY (your component) */}
       <Gallery />

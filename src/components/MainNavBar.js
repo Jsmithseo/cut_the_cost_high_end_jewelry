@@ -6,17 +6,39 @@ import { FaFacebookF, FaInstagram } from "react-icons/fa";
 export default function TopNav() {
   const { pathname } = useRouter();
   const [open, setOpen] = useState(false);
+  const [showTopbar, setShowTopbar] = useState(true); // <— controls the thin top bar
 
   // Edit your menu here
   const items = [
     { label: "Home", href: "/" },
     { label: "Start Your Design", href: "/contact" },
     { label: "About", href: "/about" }
-    
   ];
 
   return (
     <header className="nav-wrap">
+      {/* ===== Top Support Bar ===== */}
+      {showTopbar && (
+        <div className="topbar" role="region" aria-label="Support hotline">
+          <span>
+            <strong>CALL</strong>{" "}
+            <a href="tel:510-328-0122" aria-label="Call 510-328-0122">
+            +1 (510) 328-0122
+            </a>{" "}
+            FOR LIVE SUPPORT
+          </span>
+
+          {/* dismiss button (mobile-friendly) */}
+          <button
+            className="topbar-close"
+            onClick={() => setShowTopbar(false)}
+            aria-label="Close support bar"
+          >
+            ×
+          </button>
+        </div>
+      )}
+
       {/* Logo row */}
       <div className="logo-row">
         <Link href="/" className="logo-link" aria-label="Home">
@@ -70,7 +92,9 @@ export default function TopNav() {
                     isActive ? "is-active" : "",
                     item.variant === "sale" ? "is-sale" : "",
                     item.variant === "bold" ? "is-bold" : ""
-                  ].join(" ").trim()}
+                  ]
+                    .join(" ")
+                    .trim()}
                   onClick={() => setOpen(false)}
                 >
                   {item.label}
@@ -119,6 +143,60 @@ export default function TopNav() {
           box-shadow: var(--shadow);
         }
 
+        /* ===== Topbar styles ===== */
+        .topbar {
+          height: 34px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 48px; /* room for close button */
+          color: #fff;
+          font-size: 12.5px;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          position: relative;
+          /* glossy, angled dark-blue gradient like screenshot */
+          background: linear-gradient(
+            110deg,
+            #0f1a24 0%,
+            #1d2a38 30%,
+            #2a3b4f 60%,
+            #0e1821 100%
+          );
+          border-bottom: 2px solid rgba(255, 255, 255, 0.6); /* thin white line */
+        }
+        .topbar a {
+          color: #fff;
+          text-decoration: none;
+        }
+        .topbar a:hover {
+          text-decoration: underline;
+        }
+        .topbar-close {
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          height: 24px;
+          width: 24px;
+          border: 0;
+          border-radius: 4px;
+          background: rgba(255, 255, 255, 0.15);
+          color: #fff;
+          line-height: 1;
+          font-size: 18px;
+          cursor: pointer;
+        }
+        @media (max-width: 640px) {
+          .topbar {
+            font-size: 11px;
+            padding: 0 40px;
+          }
+          .topbar-close {
+            right: 6px;
+          }
+        }
+
         /* Logo row */
         .logo-row {
           display: flex;
@@ -156,7 +234,7 @@ export default function TopNav() {
           opacity: 0.7;
         }
 
-        /* Hamburger: black button w/ rounded white lines */
+        /* Hamburger */
         .hamburger {
           position: absolute;
           right: 12px;
@@ -206,30 +284,38 @@ export default function TopNav() {
         .link:hover {
           opacity: 0.7;
         }
-        .is-active { font-weight: 600; }
-        .is-sale { color: var(--brand-blue); font-weight: 600; }
-        .is-bold { font-weight: 700; }
+        .is-active {
+          font-weight: 600;
+        }
+        .is-sale {
+          color: var(--brand-blue);
+          font-weight: 600;
+        }
+        .is-bold {
+          font-weight: 700;
+        }
 
         /* Mobile adjustments */
         @media (max-width: 768px) {
-          .hamburger { display: inline-flex; }
-
-          /* Hide top-right social on mobile */
-          .social-icons { display: none; }
-
+          .hamburger {
+            display: inline-flex;
+          }
+          .social-icons {
+            display: none;
+          }
           .menu {
             display: none;
             border-top: 1px solid #f1f5f9;
           }
-          .menu.open { display: block; }
+          .menu.open {
+            display: block;
+          }
           .menu ul {
             flex-direction: column;
             align-items: center;
             gap: 10px;
             padding: 10px 16px 16px;
           }
-
-          /* Show social icons INSIDE the mobile menu */
           .mobile-social-icons {
             display: flex;
             gap: 14px;
@@ -241,12 +327,16 @@ export default function TopNav() {
             font-size: 1.4rem;
             transition: opacity 0.2s ease;
           }
-          .mobile-social-icons a:hover { opacity: 0.7; }
+          .mobile-social-icons a:hover {
+            opacity: 0.7;
+          }
         }
 
         /* Hide the mobile menu social row on desktop */
         @media (min-width: 769px) {
-          .mobile-social-icons { display: none; }
+          .mobile-social-icons {
+            display: none;
+          }
         }
       `}</style>
     </header>

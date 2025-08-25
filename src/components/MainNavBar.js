@@ -106,7 +106,7 @@ export default function TopNav() {
           {/* Social icons INSIDE the mobile menu (hidden on desktop) */}
           <li className="mobile-social-icons">
             <a
-              href="https://www.instagram.com/yourhandle"
+              href="https://www.instagram.com/cut_the_cost_high_end_jewelry?igsh=NTc4MTIwNjQ2YQ%3D%3D"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -114,7 +114,7 @@ export default function TopNav() {
               <FaInstagram />
             </a>
             <a
-              href="https://www.facebook.com/yourhandle"
+              href="https://www.facebook.com/cutthecost.highendjewelry/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"

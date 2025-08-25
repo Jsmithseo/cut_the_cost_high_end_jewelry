@@ -240,7 +240,8 @@ export default function Home() {
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
-          background-color: #050503;
+          
+        background: radial-gradient(120% 120% at 60% 45%, #2a1d0c 0%,#1d1409 45%,#120c05 70%,#070402 100%);
           overflow: hidden;
         }
         .hero::before {

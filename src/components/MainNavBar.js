@@ -48,7 +48,7 @@ export default function TopNav() {
         {/* Social Icons (desktop only; hidden on mobile) */}
         <div className="social-icons">
           <a
-            href="https://www.instagram.com/cut_the_cost_high_end_jewelry/"
+            href="https://www.instagram.com/cut_the_cost_high_end_jewelry?igsh=NTc4MTIwNjQ2YQ%3D%3D"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
